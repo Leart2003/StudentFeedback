@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-StudentFeedback-9316e71e-317e-489a-9c15-f9f7ba6c88a3</UserSecretsId>
+	  <NoWarn>$(NoWarn);NU1902</NoWarn>
+	  <NuGetAudit>false</NuGetAudit>
   </PropertyGroup>
 
   <ItemGroup>
