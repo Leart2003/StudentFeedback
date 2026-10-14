@@ -33,6 +33,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
+builder.Services.AddDbContext<FeedbackContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 app.MapStaticAssets();
 
 app.MapControllerRoute(
