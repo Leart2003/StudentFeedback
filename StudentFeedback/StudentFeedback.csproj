@@ -21,4 +21,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DbContext\" />
+    <Folder Include="Migrations\Feedback\" />
+  </ItemGroup>
+
 </Project>
