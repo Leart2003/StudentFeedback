@@ -1,0 +1,49 @@
+﻿@model StudentFeedback.Models.ResultsViewModel
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h1>Results</h1>
+<p class="text-muted">How students rated each subject.</p>
+
+<div style="position: relative; height: 420px;">
+    <canvas id="resultsChart"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        const subjects = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Subjects));
+        const series   = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Series));
+
+        const colors = {
+            "Very negative": "#dc3545",
+            "Negative":      "#fd7e14",
+            "Neutral":       "#adb5bd",
+            "Positive":      "#75b798",
+            "Very positive": "#198754"
+        };
+
+        const datasets = Object.keys(series).map(label => ({
+            label: label,
+            data: series[label],
+            backgroundColor: colors[label]
+        }));
+
+        new Chart(document.getElementById("resultsChart"), {
+            type: "bar",
+            data: { labels: subjects, datasets: datasets },
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true, beginAtZero: true, ticks: { precision: 0 },
+                         title: { display: true, text: "Number of students" } },
+                    y: { stacked: true }
+                },
+                plugins: { legend: { position: "bottom" } }
+            }
+        });
+    </script>
+}
